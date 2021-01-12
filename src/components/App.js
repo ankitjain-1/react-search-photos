@@ -9,6 +9,14 @@ class App extends Component {
     images: [],
   };
 
+  getImageOrder = () => {
+    const order = Math.ceil((Math.random() * 10) % 3) - 1;
+    const orderList = ["latest", "oldest", "popular"];
+    console.log("inside order fun");
+    console.log(orderList[order]);
+    return orderList[order];
+  };
+
   onSearchSubmit = async (searchTerm) => {
     const response = await axios.get(
       "https://api.unsplash.com/search/photos/",
@@ -19,6 +27,8 @@ class App extends Component {
         },
         params: {
           query: searchTerm,
+          per_page: 30,
+          order_by: this.getImageOrder(),
         },
       }
     );

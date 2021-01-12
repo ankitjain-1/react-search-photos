@@ -1,0 +1,10 @@
+.imageCard {
+  border-radius: 6px;
+  padding: 7px;
+  margin: 4px;
+  border: solid 1px rgb(216, 216, 216);
+}
+
+.imageCard img {
+  border-radius: 6px;
+}
