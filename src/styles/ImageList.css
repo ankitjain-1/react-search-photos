@@ -1,9 +1,15 @@
 .imagelist {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  justify-items: center;
+  align-content: center;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-auto-rows: 10px;
 }
 
 .imagelist img {
   width: 250px;
+}
+
+.imagelist p {
+  width: 280px;
 }
