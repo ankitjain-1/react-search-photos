@@ -39,26 +39,21 @@ class App extends Component {
   };
 
   render() {
-    if (this.state.loadingJSON) {
-      return (
-        <div className="ui container">
-          <SearchBar submit={this.onSearchSubmit} />
+    return (
+      <div className="ui container">
+        <SearchBar submit={this.onSearchSubmit} />
+        {this.state.loadingJSON ? (
           <div className="ui inverted container">
             <p></p>
             <div className="ui active dimmer inverted">
               <div className="ui huge loader"></div>
             </div>
           </div>
-        </div>
-      );
-    } else {
-      return (
-        <div>
-          <SearchBar submit={this.onSearchSubmit} />
+        ) : (
           <ImageList images={this.state.images} />
-        </div>
-      );
-    }
+        )}
+      </div>
+    );
   }
 }
 
