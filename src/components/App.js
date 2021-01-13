@@ -6,18 +6,20 @@ import ImageList from "./ImageList";
 class App extends Component {
   state = {
     searchTerm: "",
+    loadingJSON: false,
+    loadingImage: false,
     images: [],
   };
 
-  getImageOrder = () => {
+  getImageRandomOrder = () => {
     const order = Math.ceil((Math.random() * 10) % 3) - 1;
     const orderList = ["latest", "oldest", "popular"];
-    console.log("inside order fun");
     console.log(orderList[order]);
     return orderList[order];
   };
 
   onSearchSubmit = async (searchTerm) => {
+    this.setState({ loadingJSON: true, loadingImage: true });
     const response = await axios.get(
       "https://api.unsplash.com/search/photos/",
       {
@@ -28,21 +30,38 @@ class App extends Component {
         params: {
           query: searchTerm,
           per_page: 30,
-          order_by: this.getImageOrder(),
+          order_by: this.getImageRandomOrder(),
         },
       }
     );
     console.log(response.data.results);
-    this.setState({ images: response.data.results });
+    this.setState({ images: response.data.results, loadingJSON: false });
   };
 
   render() {
-    return (
-      <div className="ui container">
-        <SearchBar submit={this.onSearchSubmit} />
-        <ImageList images={this.state.images} />
-      </div>
-    );
+    if (this.state.loadingJSON) {
+      return (
+        <div className="ui container">
+          <SearchBar submit={this.onSearchSubmit} />
+          <div className="ui inverted container">
+            <p></p>
+            <div className="ui active dimmer inverted">
+              <div className="ui huge loader"></div>
+            </div>
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <SearchBar submit={this.onSearchSubmit} />
+          <ImageList
+            // loadingImage={this.setState({ loadingImage: true })}
+            images={this.state.images}
+          />
+        </div>
+      );
+    }
   }
 }
 
