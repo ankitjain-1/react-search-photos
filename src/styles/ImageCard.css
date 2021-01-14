@@ -9,3 +9,7 @@
 .imageCard img {
   border-radius: 6px;
 }
+
+.imagePlaceholder {
+  width: 250px;
+}

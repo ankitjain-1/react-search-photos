@@ -7,15 +7,18 @@ class ImageCard extends React.Component {
     this.imageRef = createRef();
 
     this.state = {
-      spans: 0,
+      spans: 20,
+      isImageLoading: false,
     };
   }
 
   componentDidMount() {
+    this.setState({ isImageLoading: true });
     this.imageRef.current.addEventListener("load", this.setSpans);
   }
 
   setSpans = () => {
+    this.setState({ isImageLoading: true });
     const imgHeight = this.imageRef.current.clientHeight;
     console.log(imgHeight);
     const spans = Math.ceil(imgHeight / 10) + 7;
@@ -25,14 +28,33 @@ class ImageCard extends React.Component {
   render() {
     const { urls, alt_description } = this.props.image;
     return (
-      <div
-        className="imageCard"
-        style={{ gridRowEnd: `span ${this.state.spans}` }}
-      >
-        <p style={{ textTransform: "capitalize", fontWeight: "bold" }}>
-          {alt_description}
-        </p>
-        <img ref={this.imageRef} src={urls.thumb} alt={alt_description}></img>
+      <div style={{ gridRowEnd: `span ${this.state.spans}` }}>
+        {this.state.isImageLoading ? (
+          <div ref={this.imageRef} class="ui placeholder imagePlaceholder">
+            <div class="image header">
+              <div class="line"></div>
+              <div class="line"></div>
+            </div>
+            <div class="paragraph">
+              <div class="line"></div>
+              <div class="line"></div>
+              <div class="line"></div>
+              <div class="line"></div>
+              <div class="line"></div>
+            </div>
+          </div>
+        ) : (
+          <div className="imageCard">
+            <p style={{ textTransform: "capitalize", fontWeight: "bold" }}>
+              {alt_description}
+            </p>
+            <img
+              ref={this.imageRef}
+              src={urls.thumb}
+              alt={alt_description}
+            ></img>
+          </div>
+        )}
       </div>
     );
   }
