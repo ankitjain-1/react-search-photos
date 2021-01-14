@@ -41,7 +41,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="ui container">
+      <div className="ui container app">
         <SearchBar submit={this.onSearchSubmit} />
         {this.state.loadingJSON ? (
           <div class="loader">
