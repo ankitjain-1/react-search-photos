@@ -21,9 +21,11 @@ class SearchBar extends Component {
             Search Image
           </label>
           <input
+            autoFocus
             className="ui input"
             id="searchBar"
             type="text"
+            placeholder='Search "Dogs"'
             value={this.state.term}
             onChange={(event) => this.setState({ term: event.target.value })}
           />
