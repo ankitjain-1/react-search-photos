@@ -8,6 +8,7 @@ class SearchBar extends Component {
   formSubmitHandler = (event) => {
     event.preventDefault();
     this.props.submit(this.state.term);
+    document.querySelector("#searchBar").blur();
   };
 
   render() {
