@@ -3,6 +3,7 @@ import axios from "axios";
 
 import SearchBar from "./SearchBar";
 import ImageList from "./ImageList";
+import "../styles/App.css";
 class App extends Component {
   state = {
     searchTerm: "",
@@ -43,11 +44,11 @@ class App extends Component {
       <div className="ui container">
         <SearchBar submit={this.onSearchSubmit} />
         {this.state.loadingJSON ? (
-          <div className="ui inverted container">
-            <p></p>
-            <div className="ui active dimmer inverted">
-              <div className="ui huge loader"></div>
+          <div class="loader">
+            <div class="ui active dimmer inverted">
+              <div class="ui text large loader">Loading</div>
             </div>
+            <p></p>
           </div>
         ) : (
           <ImageList images={this.state.images} />
