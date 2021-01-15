@@ -50,7 +50,7 @@ class ImageCard extends React.Component {
             </p>
             <img
               ref={this.imageRef}
-              src={urls.thumb}
+              src={urls.small}
               alt={alt_description}
             ></img>
           </div>
