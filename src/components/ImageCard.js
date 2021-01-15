@@ -28,7 +28,10 @@ class ImageCard extends React.Component {
   render() {
     const { urls, alt_description } = this.props.image;
     return (
-      <div style={{ gridRowEnd: `span ${this.state.spans}` }}>
+      <div
+        className="imageCard"
+        style={{ gridRowEnd: `span ${this.state.spans}` }}
+      >
         {this.state.isImageLoading ? (
           <div ref={this.imageRef} class="ui placeholder imagePlaceholder">
             <div class="image header">
@@ -44,7 +47,7 @@ class ImageCard extends React.Component {
             </div>
           </div>
         ) : (
-          <div className="imageCard">
+          <div>
             <p style={{ textTransform: "capitalize", fontWeight: "bold" }}>
               {alt_description}
             </p>
